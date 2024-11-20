@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using Domain;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Application.Commands.Books.AddBook;
+using Application.Queries.Books.GetAll;
+using Application.Commands.Books.DeleteBook;
+using Application.Commands.Books.UpdateBook;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPI.Controllers
@@ -8,11 +13,18 @@ namespace WebAPI.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
+        internal readonly IMediator _mediator;
+        public BookController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
         // GET: api/<BookController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("getAllBooks")]
+        public async Task<IActionResult> GetAllBooksFromDB()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _mediator.Send(new GetAllBooksQuery()));
+            
         }
 
         // GET api/<BookController>/5
@@ -24,20 +36,25 @@ namespace WebAPI.Controllers
 
         // POST api/<BookController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async void Post([FromBody] Book bookToAdd)
         {
+            await _mediator.Send(new AddBookCommand(bookToAdd));
         }
 
         // PUT api/<BookController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        //[HttpPut("{id}")]
+        [HttpPut]
+        [Route("updateBook/{updatedBookId}")]
+        public async Task<IActionResult> UpdateDog([FromBody] Book updatedBook, int updatedBookId)
         {
+            return Ok(await _mediator.Send(new UpdateBookByIdCommand(updatedBook, updatedBookId)));
         }
 
         // DELETE api/<BookController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async void Delete(int id)
         {
+            await _mediator.Send(new DeleteBookCommand(id));
         }
     }
 }

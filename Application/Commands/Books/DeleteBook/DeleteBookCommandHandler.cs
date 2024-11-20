@@ -1,53 +1,24 @@
-﻿using Application.Interfaces;
+﻿using Domain;
+using Infrastructure.Database;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Commands.Books.DeleteBook
 {
-    public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand>
+    public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, List<Book>>
     {
-        private readonly IBookRepository _bookRepository;
+        private readonly FakeDatabase _database;
 
-        public DeleteBookCommandHandler(IBookRepository bookRepository)
+        public DeleteBookCommandHandler(FakeDatabase database)
         {
-            _bookRepository = bookRepository;
+            _database = database;
         }
 
-
-      // public Task<Unit> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
-      // {
-      //     // Verifiera att boken finns
-      //     var book = _bookRepository.GetById(request.Id);
-      //     if (book == null)
-      //     {
-      //         throw new KeyNotFoundException($"Book with ID {request.Id} not found.");
-      //     }
-      //
-      //     // Ta bort boken
-      //     _bookRepository.Delete(request.Id);
-      //
-      //     // Returnera Task som innehåller Unit.Value
-      //     return Task.FromResult(Unit.Value);
-      // }
-
-        Task IRequestHandler<DeleteBookCommand>.Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+        public Task<List<Book>> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
-            // Kontrollera om boken finns
-            var book = _bookRepository.GetById(request.Id);
-            if (book == null)
-            {
-                throw new KeyNotFoundException($"Book with ID {request.Id} not found.");
-            }
+            Book bookToDelete = _database.Books.FirstOrDefault(book  => book.Id == request.Id);
+            _database.Books.Remove(bookToDelete);
+            return Task.FromResult(_database.Books);
 
-            // Ta bort boken
-            _bookRepository.Delete(request.Id);
-
-            // Returnera Task som indikerar att operationen är klar
-            return Task.FromResult(Unit.Value);
         }
     }
 }
