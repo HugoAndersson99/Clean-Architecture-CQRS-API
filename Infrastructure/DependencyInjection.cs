@@ -16,9 +16,6 @@ namespace Infrastructure
         {
             // Registrera MockDatabase som singleton (en instans för hela applikationen)
             services.AddSingleton<FakeDatabase>();
-
-            
-
             return services;
         }
     }
