@@ -1,6 +1,7 @@
-﻿using Application.Interfaces;
+﻿
 using Domain;
 using MediatR;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +10,8 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Books.AddBook
 {
-    public class AddBookCommandHandler : IRequestHandler<AddBookCommand, Guid>
+    public class AddBookCommandHandler : IRequestHandler<AddBookCommand, List<Book>>
     {
-        private readonly IBookRepository _bookRepository;
-
-        public AddBookCommandHandler(IBookRepository bookRepository)
-        {
-            _bookRepository = bookRepository;
-        }
-
-        public async Task<Guid> Handle(AddBookCommand request, CancellationToken cancellationToken)
-        {
-            var book = new Book
-            {
-                Id = Guid.NewGuid(),
-                Title = request.Title,
-                AuthorId = request.AuthorId
-            };
-            _bookRepository.Add(book);
-            return book.Id;
-            //return _bookRepository.Add(book);
-        }
+        private readonly FakeDatabase _database;
     }
 }
