@@ -12,11 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Commands\Author\" />
-    <Folder Include="Queries\Books\" />
     <Folder Include="Queries\Author\" />
   </ItemGroup>
 
