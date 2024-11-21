@@ -26,7 +26,7 @@ namespace Application.Commands.Books.AddBook
       // }
         public Task<List<Book>> Handle(AddBookCommand request, CancellationToken cancellationToken)
         {
-            var newBook = request.newBook;
+            Book newBook = request.newBook;
 
             // Kontrollera om författaren redan finns
             if (newBook.Author != null)
