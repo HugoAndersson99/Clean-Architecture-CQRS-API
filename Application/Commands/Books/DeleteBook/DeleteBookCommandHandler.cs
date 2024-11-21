@@ -13,13 +13,6 @@ namespace Application.Commands.Books.DeleteBook
             _database = database;
         }
 
-       //public Task<List<Book>> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
-       //{
-       //    Book bookToDelete = _database.Books.FirstOrDefault(book  => book.Id == request.Id);
-       //    _database.Books.Remove(bookToDelete);
-       //    return Task.FromResult(_database.Books);
-       //
-       //}
         public Task<List<Book>> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
             // Validera att ID är giltigt
@@ -40,6 +33,13 @@ namespace Application.Commands.Books.DeleteBook
             // Ta bort boken
             try
             {
+                // Ta bort boken från listan av böcker i dess författare, om en författare är kopplad
+                if (bookToDelete.Author != null)
+                {
+                    bookToDelete.Author.Books.Remove(bookToDelete);
+                }
+
+                // Ta bort boken från databasen
                 _database.Books.Remove(bookToDelete);
             }
             catch (Exception ex)
