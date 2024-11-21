@@ -49,7 +49,15 @@ namespace Application.Commands.Books.AddBook
                 // Koppla boken till författaren
                 newBook.Author = existingAuthor;
             }
-
+            // Generera ett nytt ID om det behövs
+            if (_database.Books.Count != 0)
+            {
+                newBook.Id = _database.Books.Max(a => a.Id) + 1;
+            }
+            else
+            {
+                newBook.Id = 1;
+            }
             // Lägg till boken i databasen
             _database.Books.Add(newBook);
 

@@ -1,11 +1,7 @@
 ﻿using Domain;
 using Infrastructure.Database;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Queries.Books.GetAll
 {
@@ -22,7 +18,7 @@ namespace Application.Queries.Books.GetAll
         public Task<List<Book>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
             // Kontrollera om databasen innehåller några böcker
-            if (_database.Books == null || !_database.Books.Any())
+            if (_database.Books == null || _database.Books.Count == 0)
             {
                 throw new InvalidOperationException("No books found in the database.");
             }
