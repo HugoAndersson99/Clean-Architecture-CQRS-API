@@ -31,30 +31,30 @@ namespace WebAPI.Controllers
         // GET api/<BookController>/5
         [HttpGet]
         [Route("getBookById/{bookId}")]
-        public async Task<IActionResult> GetDogById(int bookId)
+        public async Task<IActionResult> GetBookById(int bookId)
         {
             return Ok(await _mediator.Send(new GetBookByIdQuery(bookId)));
         }
 
         // POST api/<BookController>
         [HttpPost]
+        [Route("AddNewBook")]
         public async void Post([FromBody] Book bookToAdd)
         {
             await _mediator.Send(new AddBookCommand(bookToAdd));
         }
 
         // PUT api/<BookController>/5
-        //[HttpPut("{id}")]
         [HttpPut]
         [Route("updateBook/{updatedBookId}")]
-        public async Task<IActionResult> UpdateDog([FromBody] Book updatedBook, int updatedBookId)
+        public async Task<IActionResult> UpdateBook([FromBody] Book updatedBook, int updatedBookId)
         {
             return Ok(await _mediator.Send(new UpdateBookByIdCommand(updatedBook, updatedBookId)));
         }
 
         // DELETE api/<BookController>/5
         [HttpDelete("{id}")]
-        public async void Delete(int id)
+        public async void DeleteBook(int id)
         {
             await _mediator.Send(new DeleteBookCommand(id));
         }

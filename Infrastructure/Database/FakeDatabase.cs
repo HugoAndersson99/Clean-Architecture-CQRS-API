@@ -8,10 +8,27 @@ namespace Infrastructure.Database
         public List<Author> Authors { get; set; } = new();
 
         public FakeDatabase() {
-            Books.Add(new Book(1,"FirstBook", "Komedi"));
-            Books.Add(new Book(2,"SecondBook", "Skräck"));
-            Books.Add(new Book(3,"ThirdBook", "Fantasy"));
-            
+            Author HugoAuthor = new Author(1, "Hugo");
+            Author StefanAuthor = new Author(2, "Stefan");
+            Author KalleAuthor = new Author(3, "Kalle");
+
+            Authors.Add(HugoAuthor);
+            Authors.Add(StefanAuthor);
+            Authors.Add(KalleAuthor);
+
+            Book hugoBook1 = new Book(1, "FirstBookOfHugo", "Komedi", HugoAuthor);
+            Book hugoBook2 = new Book(2, "SecondBookOfHugo", "Skräck", HugoAuthor);
+            Book stefanBook = new Book(3, "OnlyBookOfStefan", "Fantasy", StefanAuthor);
+            Book noAuthorBook = new Book(4, "BookWithNoAuthor", "Fantasy");
+
+            HugoAuthor.Books.Add(hugoBook1);
+            HugoAuthor.Books.Add(hugoBook2);
+            StefanAuthor.Books.Add(stefanBook);
+
+            Books.Add(hugoBook1);
+            Books.Add(hugoBook2);
+            Books.Add(stefanBook);
+            Books.Add(noAuthorBook);
         }
     }
 }

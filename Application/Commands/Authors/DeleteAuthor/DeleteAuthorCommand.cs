@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.Books.DeleteBook
+namespace Application.Commands.Authors.DeleteAuthor
 {
-    public class DeleteBookCommand : IRequest<List<Book>>
+    public class DeleteAuthorCommand : IRequest<List<Author>>
     {
-        public DeleteBookCommand(int id)
+        public DeleteAuthorCommand(int id)
         {
             Id = id;
         }
