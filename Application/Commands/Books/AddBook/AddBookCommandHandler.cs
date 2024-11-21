@@ -26,17 +26,29 @@ namespace Application.Commands.Books.AddBook
       // }
         public Task<List<Book>> Handle(AddBookCommand request, CancellationToken cancellationToken)
         {
+            // Kontrollera om request eller newBook är null
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+            if (request.newBook == null)
+                throw new ArgumentNullException(nameof(request.newBook));
+
             Book newBook = request.newBook;
 
-            // Kontrollera om författaren redan finns
+            // Kontrollera om boken redan finns i databasen (baserat på ID eller annan unik identifierare om tillämpligt)
+            if (_database.Books.Any(book => book.Id == newBook.Id))
+                throw new InvalidOperationException($"A book with Id {newBook.Id} already exists.");
+
+            // Hantera författaren
             if (newBook.Author != null)
             {
+                // Kontrollera om författaren redan finns
                 var existingAuthor = _database.Authors.FirstOrDefault(a => a.Id == newBook.Author.Id);
 
                 if (existingAuthor == null)
                 {
                     // Om författaren inte finns, lägg till den i databasen
                     existingAuthor = newBook.Author;
+                    existingAuthor.Id = _database.Authors.Any() ? _database.Authors.Max(a => a.Id) + 1 : 1;
                     _database.Authors.Add(existingAuthor);
                 }
 
@@ -49,15 +61,10 @@ namespace Application.Commands.Books.AddBook
                 // Koppla boken till författaren
                 newBook.Author = existingAuthor;
             }
-            // Generera ett nytt ID om det behövs
-            if (_database.Books.Count != 0)
-            {
-                newBook.Id = _database.Books.Max(a => a.Id) + 1;
-            }
-            else
-            {
-                newBook.Id = 1;
-            }
+
+            // Generera ett nytt ID för boken om det behövs
+            newBook.Id = _database.Books.Any() ? _database.Books.Max(b => b.Id) + 1 : 1;
+
             // Lägg till boken i databasen
             _database.Books.Add(newBook);
 
