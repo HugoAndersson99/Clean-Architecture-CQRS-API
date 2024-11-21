@@ -5,6 +5,7 @@ using Application.Commands.Books.AddBook;
 using Application.Queries.Books.GetAll;
 using Application.Commands.Books.DeleteBook;
 using Application.Commands.Books.UpdateBook;
+using Application.Queries.Books.GetById;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPI.Controllers
@@ -28,10 +29,11 @@ namespace WebAPI.Controllers
         }
 
         // GET api/<BookController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("getBookById/{bookId}")]
+        public async Task<IActionResult> GetDogById(int bookId)
         {
-            return "value";
+            return Ok(await _mediator.Send(new GetBookByIdQuery(bookId)));
         }
 
         // POST api/<BookController>
