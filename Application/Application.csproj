@@ -16,8 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Author\" />
-    <Folder Include="Queries\Author\" />
+    <Folder Include="Commands\Author\DeleteAuthor\" />
+    <Folder Include="Commands\Author\UpdateAuthor\" />
+    <Folder Include="Queries\Author\GetAllAuthors\" />
+    <Folder Include="Queries\Author\GetAuthorById\" />
   </ItemGroup>
 
 </Project>
