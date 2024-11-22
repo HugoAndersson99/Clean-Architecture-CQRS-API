@@ -1,6 +1,4 @@
-﻿
-
-using Application.Commands.Authors.UpdateAuthor;
+﻿using Application.Commands.Authors.UpdateAuthor;
 using Domain;
 using Infrastructure.Database;
 

@@ -1,6 +1,4 @@
-﻿
-
-using Application.Queries.Authors.GetAuthorById;
+﻿using Application.Queries.Authors.GetAuthorById;
 using Domain;
 using Infrastructure.Database;
 

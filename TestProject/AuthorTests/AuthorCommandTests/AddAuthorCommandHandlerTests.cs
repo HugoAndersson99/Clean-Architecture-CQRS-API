@@ -1,6 +1,4 @@
-﻿
-
-using Application.Commands.Authors.AddAuthor;
+﻿using Application.Commands.Authors.AddAuthor;
 using Domain;
 using Infrastructure.Database;
 

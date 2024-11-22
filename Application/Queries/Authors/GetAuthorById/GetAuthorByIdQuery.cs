@@ -1,5 +1,4 @@
-﻿
-using Domain;
+﻿using Domain;
 using MediatR;
 
 namespace Application.Queries.Authors.GetAuthorById

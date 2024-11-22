@@ -1,6 +1,4 @@
-﻿
-
-using Domain;
+﻿using Domain;
 using Infrastructure.Database;
 using MediatR;
 
@@ -38,10 +36,8 @@ namespace Application.Commands.Authors.AddAuthor
                 newAuthor.Id = 1;
             }
 
-            // Lägg till författaren
             _database.Authors.Add(newAuthor);
 
-            // Returnera listan av författare
             return Task.FromResult(_database.Authors);
         }
     }

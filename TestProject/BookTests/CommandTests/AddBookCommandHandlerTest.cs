@@ -1,6 +1,4 @@
-﻿
-
-using Application.Commands.Books.AddBook;
+﻿using Application.Commands.Books.AddBook;
 using Domain;
 using Infrastructure.Database;
 

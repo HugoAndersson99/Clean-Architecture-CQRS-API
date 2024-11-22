@@ -15,31 +15,25 @@ namespace Application.Commands.Books.DeleteBook
 
         public Task<List<Book>> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
-            // Validera att ID är giltigt
             if (request.Id <= 0)
             {
                 throw new ArgumentException("Id must be greater than 0.", nameof(request.Id));
             }
 
-            // Försök hitta boken
             Book bookToDelete = _database.Books.FirstOrDefault(book => book.Id == request.Id);
 
-            // Hantera om boken inte hittas
             if (bookToDelete == null)
             {
                 throw new KeyNotFoundException($"No book found with Id {request.Id}.");
             }
 
-            // Ta bort boken
             try
             {
-                // Ta bort boken från listan av böcker i dess författare, om en författare är kopplad
                 if (bookToDelete.Author != null)
                 {
                     bookToDelete.Author.Books.Remove(bookToDelete);
                 }
 
-                // Ta bort boken från databasen
                 _database.Books.Remove(bookToDelete);
             }
             catch (Exception ex)
@@ -47,7 +41,6 @@ namespace Application.Commands.Books.DeleteBook
                 throw new InvalidOperationException($"An error occurred while trying to delete the book with Id {request.Id}.", ex);
             }
 
-            // Returnera uppdaterad lista
             return Task.FromResult(_database.Books);
         }
     }

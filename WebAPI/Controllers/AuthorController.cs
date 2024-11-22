@@ -1,13 +1,8 @@
 ﻿using Application.Commands.Authors.AddAuthor;
 using Application.Commands.Authors.DeleteAuthor;
 using Application.Commands.Authors.UpdateAuthor;
-using Application.Commands.Books.AddBook;
-using Application.Commands.Books.DeleteBook;
-using Application.Commands.Books.UpdateBook;
 using Application.Queries.Authors.GetAllAuthors;
 using Application.Queries.Authors.GetAuthorById;
-using Application.Queries.Books.GetAll;
-using Application.Queries.Books.GetById;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +34,7 @@ namespace WebAPI.Controllers
             {
                 author.Id,
                 author.Name,
-                Books = author.Books // Lägg till böcker här
+                Books = author.Books 
             });
 
             return Ok(authorsWithBooks);
@@ -50,15 +45,13 @@ namespace WebAPI.Controllers
         [Route("getAuthorById/{authorId}")]
         public async Task<IActionResult> GetAuthorById(int authorId)
         {
-            // return Ok(await _mediator.Send(new GetAuthorByIdQuery(authorId)));
             var author = await _mediator.Send(new GetAuthorByIdQuery(authorId));
 
-            // Skapa en anpassad struktur med böcker
             var authorWithBooks = new
             {
                 author.Id,
                 author.Name,
-                Books = author.Books // Inkluderar böcker här
+                Books = author.Books
             };
 
             return Ok(authorWithBooks);

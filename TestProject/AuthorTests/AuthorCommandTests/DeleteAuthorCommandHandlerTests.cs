@@ -1,5 +1,4 @@
-﻿
-using Application.Commands.Authors.DeleteAuthor;
+﻿using Application.Commands.Authors.DeleteAuthor;
 using Domain;
 using Infrastructure.Database;
 
