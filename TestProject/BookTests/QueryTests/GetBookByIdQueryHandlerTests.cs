@@ -1,6 +1,4 @@
-﻿
-
-using Application.Queries.Books.GetById;
+﻿using Application.Queries.Books.GetById;
 using Domain;
 using Infrastructure.Database;
 

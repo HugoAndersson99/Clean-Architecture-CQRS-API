@@ -1,6 +1,4 @@
-﻿
-
-using Application.Queries.Books.GetAll;
+﻿using Application.Queries.Books.GetAll;
 using Infrastructure.Database;
 
 namespace TestProject.BookTests.QueryTests

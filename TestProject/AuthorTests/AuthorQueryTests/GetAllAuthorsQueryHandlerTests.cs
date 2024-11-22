@@ -1,5 +1,4 @@
-﻿
-using Application.Queries.Authors.GetAllAuthors;
+﻿using Application.Queries.Authors.GetAllAuthors;
 using Infrastructure.Database;
 
 namespace TestProject.AuthorTests.AuthorQueryTests

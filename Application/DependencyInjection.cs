@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application
 {
@@ -13,8 +8,6 @@ namespace Application
         {
             var assembly = typeof(DependencyInjection).Assembly;
             services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(assembly));
-
-           
 
             return services;
         }

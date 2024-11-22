@@ -1,6 +1,4 @@
-﻿
-
-using Domain;
+﻿using Domain;
 using MediatR;
 
 namespace Application.Commands.Authors.AddAuthor

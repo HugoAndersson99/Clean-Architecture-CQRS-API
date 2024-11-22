@@ -1,6 +1,4 @@
-﻿
-
-using Application.Commands.Books.DeleteBook;
+﻿using Application.Commands.Books.DeleteBook;
 using Domain;
 using Infrastructure.Database;
 
