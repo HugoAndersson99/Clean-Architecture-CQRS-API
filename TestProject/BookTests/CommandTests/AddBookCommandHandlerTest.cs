@@ -22,7 +22,7 @@ namespace TestProject.BookTests.CommandTests
         public async Task Handle_ShouldAddBookToDatabase()
         {
             // Arrange
-            int newId = 4;
+            int newId = 10;
             var newBook = new Book(newId, "New Book", "New Description");
             var command = new AddBookCommand(newBook);
             int previousCountInDatabase = _fakeDatabase.Books.Count;
