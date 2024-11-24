@@ -30,5 +30,18 @@ namespace Infrastructure.Database
           Books.Add(stefanBook);
           Books.Add(noAuthorBook);
         }
+
+        public List<User> Users
+        {
+            get { return allUsers; }
+            set { allUsers = value; }
+        }
+
+        private static List<User> allUsers = new List<User>()
+        {
+            new User { Id = Guid.NewGuid(), UserName = "Hugo"},
+            new User { Id = Guid.NewGuid(), UserName = "Tori"},
+            new User { Id = Guid.NewGuid(), UserName = "Bali"}
+        };
     }
 }
