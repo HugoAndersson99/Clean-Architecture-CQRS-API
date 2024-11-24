@@ -6,6 +6,7 @@ using Application.Queries.Books.GetAll;
 using Application.Commands.Books.DeleteBook;
 using Application.Commands.Books.UpdateBook;
 using Application.Queries.Books.GetById;
+using Microsoft.AspNetCore.Authorization;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPI.Controllers
@@ -20,6 +21,7 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
         // GET: api/<BookController>
+        [Authorize]
         [HttpGet]
         [Route("getAllBooks")]
         public async Task<IActionResult> GetAllBooksFromDB()
@@ -29,6 +31,7 @@ namespace WebAPI.Controllers
         }
 
         // GET api/<BookController>/5
+        [Authorize]
         [HttpGet]
         [Route("getBookById/{bookId}")]
         public async Task<IActionResult> GetBookById(int bookId)
@@ -37,6 +40,7 @@ namespace WebAPI.Controllers
         }
 
         // POST api/<BookController>
+        [Authorize]
         [HttpPost]
         [Route("AddNewBook")]
         public async void Post([FromBody] Book bookToAdd)
@@ -45,6 +49,7 @@ namespace WebAPI.Controllers
         }
 
         // PUT api/<BookController>/5
+        [Authorize]
         [HttpPut]
         [Route("updateBook/{updatedBookId}")]
         public async Task<IActionResult> UpdateBook([FromBody] Book updatedBook, int updatedBookId)
@@ -53,6 +58,7 @@ namespace WebAPI.Controllers
         }
 
         // DELETE api/<BookController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async void DeleteBook(int id)
         {

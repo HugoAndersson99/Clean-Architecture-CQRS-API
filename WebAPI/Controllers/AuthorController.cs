@@ -5,6 +5,7 @@ using Application.Queries.Authors.GetAllAuthors;
 using Application.Queries.Authors.GetAuthorById;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,6 +24,7 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/<AuthorController>
+        [Authorize]
         [HttpGet]
         [Route("getAllAuthors")]
         public async Task<IActionResult> GetAllAuthorsFromDB()
@@ -41,6 +43,7 @@ namespace WebAPI.Controllers
         }
 
         // GET api/<AuthorController>/5
+        [Authorize]
         [HttpGet]
         [Route("getAuthorById/{authorId}")]
         public async Task<IActionResult> GetAuthorById(int authorId)
@@ -58,6 +61,7 @@ namespace WebAPI.Controllers
         }
 
         // POST api/<AuthorController>
+        [Authorize]
         [HttpPost]
         [Route("AddNewAuthor")]
         public async void Post([FromBody] Author authorToAdd)
@@ -66,6 +70,7 @@ namespace WebAPI.Controllers
         }
 
         // PUT api/<AuthorController>/5
+        [Authorize]
         [HttpPut]
         [Route("updateAuthor/{updatedAuthorId}")]
         public async Task<IActionResult> UpdateAuthor([FromBody] Author updatedAuthor, int updatedAuthorId)
@@ -74,6 +79,7 @@ namespace WebAPI.Controllers
         }
 
         // DELETE api/<AuthorController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async void DeleteAuthor(int id)
         {
